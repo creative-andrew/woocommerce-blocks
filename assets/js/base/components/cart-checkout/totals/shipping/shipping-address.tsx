@@ -4,6 +4,8 @@
 import { __ } from '@wordpress/i18n';
 import { ShippingAddress as ShippingAddressType } from '@woocommerce/settings';
 import PickupLocation from '@woocommerce/base-components/cart-checkout/pickup-location';
+import { CHECKOUT_STORE_KEY } from '@woocommerce/block-data';
+import { useSelect } from '@wordpress/data';
 
 /**
  * Internal dependencies
@@ -16,7 +18,6 @@ export interface ShippingAddressProps {
 	isShippingCalculatorOpen: boolean;
 	setIsShippingCalculatorOpen: CalculatorButtonProps[ 'setIsShippingCalculatorOpen' ];
 	shippingAddress: ShippingAddressType;
-	prefersCollection?: boolean | undefined;
 }
 
 export const ShippingAddress = ( {
@@ -24,8 +25,10 @@ export const ShippingAddress = ( {
 	isShippingCalculatorOpen,
 	setIsShippingCalculatorOpen,
 	shippingAddress,
-	prefersCollection = false,
 }: ShippingAddressProps ): JSX.Element | null => {
+	const prefersCollection = useSelect( ( select ) =>
+		select( CHECKOUT_STORE_KEY ).prefersCollection()
+	);
 	return (
 		<>
 			{ prefersCollection ? (
