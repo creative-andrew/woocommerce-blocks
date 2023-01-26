@@ -2,7 +2,8 @@
  * External dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { EnteredAddress } from '@woocommerce/settings';
+import { ShippingAddress as ShippingAddressType } from '@woocommerce/settings';
+import PickupLocation from '@woocommerce/base-components/cart-checkout/pickup-location';
 
 /**
  * Internal dependencies
@@ -14,7 +15,8 @@ export interface ShippingAddressProps {
 	showCalculator: boolean;
 	isShippingCalculatorOpen: boolean;
 	setIsShippingCalculatorOpen: CalculatorButtonProps[ 'setIsShippingCalculatorOpen' ];
-	shippingAddress: EnteredAddress;
+	shippingAddress: ShippingAddressType;
+	prefersCollection?: boolean | undefined;
 }
 
 export const ShippingAddress = ( {
@@ -22,10 +24,15 @@ export const ShippingAddress = ( {
 	isShippingCalculatorOpen,
 	setIsShippingCalculatorOpen,
 	shippingAddress,
+	prefersCollection = false,
 }: ShippingAddressProps ): JSX.Element | null => {
 	return (
 		<>
-			<ShippingLocation address={ shippingAddress } />
+			{ prefersCollection ? (
+				<PickupLocation />
+			) : (
+				<ShippingLocation address={ shippingAddress } />
+			) }
 			{ showCalculator && (
 				<CalculatorButton
 					label={ __(
