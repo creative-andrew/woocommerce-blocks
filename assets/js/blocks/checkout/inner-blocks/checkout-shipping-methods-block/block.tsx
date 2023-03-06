@@ -13,8 +13,6 @@ import FormattedMonetaryAmount from '@woocommerce/base-components/formatted-mone
 import { useEditorContext, noticeContexts } from '@woocommerce/base-context';
 import { StoreNoticesContainer } from '@woocommerce/blocks-checkout';
 import { decodeEntities } from '@wordpress/html-entities';
-import { Notice } from 'wordpress-components';
-import classnames from 'classnames';
 import { getSetting } from '@woocommerce/settings';
 import type {
 	PackageRateOption,
@@ -23,6 +21,7 @@ import type {
 import type { ReactElement } from 'react';
 import { useSelect } from '@wordpress/data';
 import { CART_STORE_KEY } from '@woocommerce/block-data';
+import NoticeBanner from '@woocommerce/base-components/notices/notice-banner';
 
 /**
  * Internal dependencies
@@ -121,18 +120,16 @@ const Block = ( {
 			) : (
 				<ShippingRatesControl
 					noResultsMessage={
-						<Notice
+						<NoticeBanner
 							isDismissible={ false }
-							className={ classnames(
-								'wc-block-components-shipping-rates-control__no-results-notice',
-								'woocommerce-error'
-							) }
+							className="wc-block-components-shipping-rates-control__no-results-notice"
+							status="error"
 						>
 							{ __(
 								'There are no shipping options available. Please check your shipping address.',
 								'woo-gutenberg-products-block'
 							) }
-						</Notice>
+						</NoticeBanner>
 					}
 					renderOption={ renderShippingRatesControlOption }
 					collapsible={ false }

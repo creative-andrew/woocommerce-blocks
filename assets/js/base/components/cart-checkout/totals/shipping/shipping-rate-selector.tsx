@@ -2,9 +2,8 @@
  * External dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Notice } from 'wordpress-components';
-import classnames from 'classnames';
 import type { CartResponseShippingRate } from '@woocommerce/types';
+import NoticeBanner from '@woocommerce/base-components/notices/notice-banner';
 
 /**
  * Internal dependencies
@@ -31,18 +30,16 @@ export const ShippingRateSelector = ( {
 			<ShippingRatesControl
 				className="wc-block-components-totals-shipping__options"
 				noResultsMessage={
-					<Notice
+					<NoticeBanner
 						isDismissible={ false }
-						className={ classnames(
-							'wc-block-components-shipping-rates-control__no-results-notice',
-							'woocommerce-error'
-						) }
+						className="wc-block-components-shipping-rates-control__no-results-notice"
+						status="error"
 					>
 						{ __(
 							'No shipping options were found.',
 							'woo-gutenberg-products-block'
 						) }
-					</Notice>
+					</NoticeBanner>
 				}
 				shippingRates={ shippingRates }
 				isLoadingRates={ isLoadingRates }
