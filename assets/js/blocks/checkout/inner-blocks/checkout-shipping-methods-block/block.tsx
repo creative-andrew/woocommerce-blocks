@@ -21,7 +21,7 @@ import type {
 import type { ReactElement } from 'react';
 import { useSelect } from '@wordpress/data';
 import { CART_STORE_KEY } from '@woocommerce/block-data';
-import NoticeBanner from '@woocommerce/base-components/notices/notice-banner';
+import NoticeBanner from '@woocommerce/base-components/notice-banner';
 
 /**
  * Internal dependencies
