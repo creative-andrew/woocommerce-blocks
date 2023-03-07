@@ -9,6 +9,7 @@
 -   [Place Order Button Label](#place-order-button-label)
 -   [Additional Cart and Checkout inner block types](#additional-cart-checkout-inner-block-types)
 -   [Examples](#examples)
+    -   [Allowing blocks in specific areas in the Cart and Checkout blocks](#allowing-blocks-in-specific-areas-in-the-cart-and-checkout-blocks)
     -   [Changing the wording of the Totals label in the Mini Cart, Cart and Checkout](#changing-the-wording-of-the-totals-label-in-the-mini-cart-cart-and-checkout)
     -   [Changing the format of the item's single price](#changing-the-format-of-the-items-single-price)
     -   [Change the name of a coupon](#change-the-name-of-a-coupon)
