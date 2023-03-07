@@ -7,7 +7,7 @@
 -   [Totals footer item (in Mini Cart, Cart and Checkout)](#totals-footer-item-in-mini-cart-cart-and-checkout)
 -   [Coupons](#coupons)
 -   [Place Order Button Label](#place-order-button-label)
--   [Allowed block types](#allowed-block-types)
+-   [Additional Cart and Checkout inner block types](#additional-cart-checkout-inner-block-types)
 -   [Examples](#examples)
     -   [Changing the wording of the Totals label in the Mini Cart, Cart and Checkout](#changing-the-wording-of-the-totals-label-in-the-mini-cart-cart-and-checkout)
     -   [Changing the format of the item's single price](#changing-the-format-of-the-items-single-price)
@@ -99,17 +99,17 @@ The Checkout block contains a button which is labelled 'Place Order' by default,
 | ----------------------- | ------------------------------------------- | ----------- |
 | `placeOrderButtonLabel` | The wanted label of the Place Order button. | `string`    |
 
-## Allowed block types
+## Additional Cart Checkout inner block types
 
 The Cart and Checkout blocks are made up of inner blocks. These inner blocks areas allow certain block types to be added as children. By default, only `core/paragraph`, `core/image`, and `core/separator` are available to add.
 
-By using the `allowedBlockTypes` filter it is possible to add or remove items from this array to control what the editor can insert into an inner block.
+By using the `additionalCartCheckoutInnerBlockTypes` filter it is possible to add items to this array to control what the editor can insert into an inner block.
 
 This filter is called once for each inner block area, so it is possible to be very granular when determining what blocks can be added where. See the [Allowing blocks in specific areas in the Cart and Checkout blocks.](#allowing-blocks-in-specific-areas-in-the-cart-and-checkout-blocks) example for more information.
 
 | Filter name         | Description                            | Return type |
 | ------------------- |----------------------------------------|-------------|
-| `allowedBlockTypes` | The new array of allowwed block types. | `string[]`  |
+| `additionalCartCheckoutInnerBlockTypes` | The new array of allowwed block types. | `string[]`  |
 
 ## Examples
 
@@ -119,16 +119,12 @@ Let's suppose we want to allow the editor to add some blocks in specific places 
 
 1. Allow `core/table` to be inserted in the Shipping Address block in the Checkout.
 2. Allow `core/quote` to be inserted in every block area in the Cart and Checkout blocks.
-3. Remove the ability to add the `core/separator` block to any inner block in the Cart and Checkout blocks.
 
-In our extension we could register a filter satisfy all three of these conditions like so:
+In our extension we could register a filter satisfy both of these conditions like so:
 
 ```tsx
 registerCheckoutFilters( 'newsletter-plugin', {
 	allowedBlockTypes: ( value, extensions, { block } ) => {
-        // Remove the ability to add `core/separator`
-		value = value.filter( ( blockName ) => blockName !== 'core/separator' );
-
         // Add core/quote to any inner block area.
 		value.push( 'core/quote' );
 
