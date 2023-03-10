@@ -10,7 +10,7 @@ import type { Currency } from '@woocommerce/price-format';
 import { ShippingVia } from '@woocommerce/base-components/cart-checkout/totals/shipping/shipping-via';
 import { CHECKOUT_STORE_KEY } from '@woocommerce/block-data';
 import { useSelect } from '@wordpress/data';
-import { getSetting } from '@woocommerce/settings';
+import { isPackageRateCollectable } from '@woocommerce/base-utils';
 
 /**
  * Internal dependencies
@@ -33,11 +33,6 @@ export interface TotalShippingProps {
 	className?: string;
 	isCheckout?: boolean;
 }
-
-const collectibleMethodIds = getSetting< string[] >(
-	'collectibleMethodIds',
-	[]
-);
 export const TotalsShipping = ( {
 	currency,
 	values,
@@ -66,9 +61,9 @@ export const TotalsShipping = ( {
 			return shippingPackage.shipping_rates
 				.filter(
 					( rate ) =>
-						// If the shopper prefers collection, the rate is collectible AND selected.
+						// If the shopper prefers collection, the rate is collectable AND selected.
 						( prefersCollection &&
-							collectibleMethodIds.includes( rate.method_id ) &&
+							isPackageRateCollectable( rate ) &&
 							rate.selected ) ||
 						// Or the shopper does not prefer collection and the rate is selected
 						( ! prefersCollection && rate.selected )
