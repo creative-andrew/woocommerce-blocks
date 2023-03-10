@@ -65,7 +65,7 @@ describe( 'Shopper → Checkout', () => {
 			await merchant.login();
 			await visitBlockPage( 'Checkout Block' );
 			await openDocumentSettingsSidebar();
-			await switchBlockInspectorTabWhenGutenbergIsInstalled( 'Settings' );
+			// await switchBlockInspectorTabWhenGutenbergIsInstalled( 'Settings' );
 			await selectBlockByName(
 				'woocommerce/checkout-shipping-address-block'
 			);
@@ -79,7 +79,7 @@ describe( 'Shopper → Checkout', () => {
 			await shopper.block.emptyCart();
 			await visitBlockPage( 'Checkout Block' );
 			await openDocumentSettingsSidebar();
-			await switchBlockInspectorTabWhenGutenbergIsInstalled( 'Settings' );
+			// await switchBlockInspectorTabWhenGutenbergIsInstalled( 'Settings' );
 			await selectBlockByName(
 				'woocommerce/checkout-shipping-address-block'
 			);
