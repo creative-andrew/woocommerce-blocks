@@ -172,6 +172,12 @@ h2.wc-block-mini-cart__title {
 
 		.wc-block-components-button {
 			flex-grow: 1;
+
+			&:disabled {
+				padding: $gap-large;
+				opacity: 0.6;
+				cursor: auto;
+			}
 		}
 
 		.wc-block-components-button.outlined {

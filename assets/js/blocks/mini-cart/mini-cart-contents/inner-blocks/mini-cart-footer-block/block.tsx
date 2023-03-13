@@ -15,6 +15,7 @@ import { CART_URL, CHECKOUT_URL } from '@woocommerce/block-settings';
 import Button from '@woocommerce/base-components/button';
 import { PaymentEventsProvider } from '@woocommerce/base-context';
 import classNames from 'classnames';
+import { select } from '@wordpress/data';
 
 /**
  * Internal dependencies
@@ -39,6 +40,11 @@ interface Props {
 	checkoutButtonLabel: string;
 }
 
+const isCartItemUpdating = () => {
+	const store = select( 'wc/store/cart' );
+	return store.getItemsPendingQuantityUpdate()?.length !== 0;
+};
+
 const Block = ( {
 	className,
 	cartButtonLabel,
@@ -49,6 +55,8 @@ const Block = ( {
 		? parseInt( cartTotals.total_items, 10 ) +
 		  parseInt( cartTotals.total_items_tax, 10 )
 		: parseInt( cartTotals.total_items, 10 );
+
+	const cartItemUpdating = isCartItemUpdating();
 
 	return (
 		<div
@@ -70,6 +78,8 @@ const Block = ( {
 						className="wc-block-mini-cart__footer-cart"
 						href={ CART_URL }
 						variant="outlined"
+						disabled={ cartItemUpdating }
+						showSpinner={ cartItemUpdating }
 					>
 						{ cartButtonLabel || defaultCartButtonLabel }
 					</Button>
@@ -78,6 +88,8 @@ const Block = ( {
 					<Button
 						className="wc-block-mini-cart__footer-checkout"
 						href={ CHECKOUT_URL }
+						disabled={ cartItemUpdating }
+						showSpinner={ cartItemUpdating }
 					>
 						{ checkoutButtonLabel || defaultCheckoutButtonLabel }
 					</Button>
