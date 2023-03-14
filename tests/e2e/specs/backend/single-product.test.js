@@ -1,7 +1,11 @@
 /**
  * External dependencies
  */
-import { getAllBlocks, switchUserToAdmin } from '@wordpress/e2e-test-utils';
+import {
+	getAllBlocks,
+	switchUserToAdmin,
+	deleteAllTemplates,
+} from '@wordpress/e2e-test-utils';
 import { visitBlockPage } from '@woocommerce/blocks-test-utils';
 
 /**
@@ -32,5 +36,10 @@ describe( `${ block.name } Block`, () => {
 
 	it( 'renders without crashing', async () => {
 		await expect( page ).toRenderBlock( block );
+	} );
+
+	afterAll( async () => {
+		await deleteAllTemplates( 'wp_template' );
+		await deleteAllTemplates( 'wp_template_part' );
 	} );
 } );
